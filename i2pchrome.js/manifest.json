@@ -28,8 +28,8 @@
   },
   "background": {
     "scripts": [
-      "background.js",
       "browser-polyfill.js",
+      "background.js",
       "proxy.js",
       "info.js",
       "privacy.js"
