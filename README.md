@@ -34,6 +34,8 @@ Step 1: Create an I2P Browsing Profile
  * 1D: Awwwwwww...
  * ![Feel bad.](done.png)
 
+Step 2: Install plugin on profile
+
 Pure Terminal Solution, Unix-Only
 ---------------------------------
 
