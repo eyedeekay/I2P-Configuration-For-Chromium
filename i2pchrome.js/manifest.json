@@ -13,7 +13,7 @@
   "name": "__MSG_extensionName__",
   "version": "0.26",
   "description": "__MSG_extensionDescription__",
-  "homepage_url": "https://github.com/eyedeekay/i2pchrome.js",
+  "homepage_url": "https://github.com/eyedeekay/I2P-Configuration-For-Chromium",
   "icons": {
     "48": "icons/toopie.png"
   },
