@@ -1,203 +1,54 @@
 var titlepref = chrome.i18n.getMessage("titlePreface");
 
-function onSet(result) {
-  if (result) {
-    console.log("->: Value was updated");
-  } else {
-    console.log("-X: Value was not updated");
-  }
-}
-
-/* This disables queries to centralized databases of bad URLs to screen for
-   risky sites in your browser */
-function disableHyperlinkAuditing() {
-  var setting = browser.privacy.websites.hyperlinkAuditingEnabled.set({
-    value: false
-  });
-  console.log("Disabling hyperlink auditing/val=", {
-    value: false
-  });
-  setting.then(onSet);
-}
-
-// This enables first-party isolation
-function enableFirstPartyIsolation() {
-  /*var setting = browser.privacy.websites.firstPartyIsolate.set({
-    value: true
-  });
-  console.log("Enabling first party isolation/val=", {
-    value: true
-  });
-  setting.then(onSet);*/
-}
-
-/* This rejects tracking cookies and third-party cookies but it
-   LEAVES "Persistent" Cookies unmodified in favor of an option in the content
-   interface for now */
-function disableEvilCookies() {
-  /*var getting = browser.privacy.websites.cookieConfig.get({});
-  getting.then(got => {
-    var setting = browser.privacy.websites.cookieConfig.set({
-      value: {
-        behavior: "reject_third_party",
-        nonPersistentCookies: got.value.nonPersistentCookies
-      }
-    });
-    console.log("Setting cookie behavior/val=", {
-      value: {
-        behavior: "reject_third_party",
-        nonPersistentCookies: got.value.nonPersistentCookies
-      }
-    });
-    setting.then(onSet);
-  });*/
-}
-
-// Make sure that they're gone
-/*function disableBadCookies(){
-    var setting = browser.privacy.websites.thirdPartyCookiesAllowed.set({
-      value: false
-    });
-    console.log("Disabling third party cookies/val=", {
-      value: false
-    })
-    setting.then(onSet);
-}*/
-
-// this disables the use of referrer headers
-function disableReferrers() {
-  var setting = browser.privacy.websites.referrersEnabled.set({
-    value: false
-  });
-  console.log("Disabling referrer headers/val=", {
-    value: false
-  });
-  setting.then(onSet);
-}
-
-// enable fingerprinting resistent features(letterboxing and stuff)
-function enableResistFingerprinting() {
-  /*var setting = browser.privacy.websites.resistFingerprinting.set({
-    value: true
-  });
-  console.log("Enabling resist fingerprinting/val=", {
-    value: true
-  });
-  setting.then(onSet);*/
-}
-
-// This is essentially a blocklist of clearnet web-sites known to do bad tracking
-function enableTrackingProtection() {
-  /*var setting = browser.privacy.websites.trackingProtectionMode.set({
-    value: "always"
-  });
-  console.log("Enabling tracking protection/val=", {
-    value: "always"
-  });
-  setting.then(onSet);*/
-}
-
 /* This disables protected content, which is a form of digital restrictions
    management dependent on identifying information */
 function disableDigitalRestrictionsManagement() {
-  var gettingInfo = browser.runtime.getPlatformInfo();
+  /*var gettingInfo = chrome.runtime.getPlatformInfo();
   gettingInfo.then(got => {
     if (got.os == "win") {
-      var setting = browser.privacy.websites.protectedContentEnabled.set({
-        value: false
-      });
-      console.log(
-        "Setting Protected Content(Digital Restrictions Management) false/val=",
-        {
-          value: false
-        }
-      );
-      setting.then(onSet);
+      chrome.privacy.websites.protectedContentEnabled.set({ value: false });
     }
-  });
+  });*/
 }
 
 function setAllPrivacy() {
-  disableHyperlinkAuditing();
-  enableFirstPartyIsolation();
-  disableEvilCookies();
-  disableReferrers();
-  enableTrackingProtection();
-  enableResistFingerprinting();
-  disableDigitalRestrictionsManagement();
+  chrome.privacy.network.networkPredictionEnabled.set({ value: false });
+
+  chrome.privacy.services.alternateErrorPagesEnabled.set({ value: false });
+  chrome.privacy.services.autofillEnabled.set({ value: false });
+  //chrome.privacy.services.hotwordSearchEnabled.set({ value: false });
+  chrome.privacy.services.passwordSavingEnabled.set({ value: false });
+  chrome.privacy.services.safeBrowsingEnabled.set({ value: false });
+  chrome.privacy.services.safeBrowsingExtendedReportingEnabled.set({
+    value: false
+  });
+  chrome.privacy.services.searchSuggestEnabled.set({ value: false });
+  chrome.privacy.services.spellingServiceEnabled.set({ value: false });
+  chrome.privacy.services.translationServiceEnabled.set({ value: false });
+
+  chrome.privacy.websites.thirdPartyCookiesAllowed.set({ value: false });
+  chrome.privacy.websites.hyperlinkAuditingEnabled.set({ value: false });
+  //disableDigitalRestrictionsManagement()
 }
 
 setAllPrivacy();
 
 function ResetPeerConnection() {
-  function reset(snowflake) {
-    var webrtc = false;
-    console.log("No snowflake plugin found, pre-disabled WebRTC");
-    var rtc = browser.privacy.network.peerConnectionEnabled.set({
-      value: webrtc
-    });
-    rtc.then(AssurePeerConnection);
-  }
-  function snowflake(snowflake) {
-    console.log("snowflake plugin found, leaving WebRTC alone", snowflake);
-    EnablePeerConnection();
-  }
-  var snowflakeInfo = browser.management.get(
-    "{b11bea1f-a888-4332-8d8a-cec2be7d24b9}" // string
-  );
-  snowflakeInfo.then(snowflake, reset);
+  AssurePeerConnection();
 }
 
 function EnablePeerConnection() {
-  var webrtc = true;
-  var rtc = browser.privacy.network.peerConnectionEnabled.set({
-    value: webrtc
-  });
-  rtc.then(AssurePeerConnection);
+  AssurePeerConnection();
   console.log("Enabled WebRTC");
 }
 
 function AssurePeerConnection() {
-  function assure(webrtc) {
-    browser.privacy.network.peerConnectionEnabled.set({
-      value: webrtc.value
-    });
-    browser.privacy.network.networkPredictionEnabled.set({
-      value: false
-    });
-    chrome.privacy.network.webRTCIPHandlingPolicy.set({
-      value: "proxy_only"
-    });
-  }
-  let rtc = browser.privacy.network.peerConnectionEnabled.get({});
-  rtc.then(assure);
-}
-
-var gettingInfo = browser.runtime.getPlatformInfo();
-gettingInfo.then(got => {
-  if (got.os == "android") {
-    browser.tabs.onCreated.addListener(ResetPeerConnection);
-  } else {
-    browser.windows.onCreated.addListener(ResetPeerConnection);
-  }
-});
-//AssurePeerConnection();
-
-function ResetDisableSavePasswords() {
-  browser.privacy.services.passwordSavingEnabled.set({
-    value: false
+  chrome.privacy.network.webRTCIPHandlingPolicy.set({
+    value: "disable_non_proxied_udp"
   });
-  console.log("Re-disabled saved passwords");
 }
 
-function EnableSavePasswords() {
-  browser.privacy.services.passwordSavingEnabled.set({
-    value: true
-  });
-  console.log("Enabled saved passwords");
-}
-
-//ResetDisableSavePasswords()
+chrome.tabs.onCreated.addListener(AssurePeerConnection);
 
 var defaultSettings = {
   since: "forever",
@@ -238,7 +89,7 @@ function forgetBrowsingData(storedSettings) {
   function notify() {
     let dataTypesString = Object.keys(dataTypes).join(", ");
     let sinceString = new Date(since).toLocaleString();
-    browser.notifications.create({
+    chrome.notifications.create({
       type: "basic",
       title: "Removed browsing data",
       message: `Removed ${dataTypesString}\n for I2P Browsing`
@@ -249,33 +100,33 @@ function forgetBrowsingData(storedSettings) {
     console.log("Deep cleaning history");
     for (let item of historyItems) {
       if (i2pHost(item.url)) {
-        browser.history.deleteUrl({
+        chrome.history.deleteUrl({
           url: item.url
         });
-        browser.browsingData.removeCache({});
+        chrome.browsingData.removeCache({});
         console.log("cleared Cache");
-        browser.browsingData
+        chrome.browsingData
           .removePasswords({
             hostnames: [i2pHostName(item.url)],
             since
           })
           .then(onContextGotLog);
         console.log("cleared Passwords");
-        browser.browsingData
+        chrome.browsingData
           .removeDownloads({
             hostnames: [i2pHostName(item.url)],
             since
           })
           .then(onContextGotLog);
         console.log("cleared Downloads");
-        browser.browsingData
+        chrome.browsingData
           .removeFormData({
             hostnames: [i2pHostName(item.url)],
             since
           })
           .then(onContextGotLog);
         console.log("cleared Form Data");
-        browser.browsingData
+        chrome.browsingData
           .removeLocalStorage({
             hostnames: [i2pHostName(item.url)],
             since
@@ -283,13 +134,13 @@ function forgetBrowsingData(storedSettings) {
           .then(onContextGotLog);
         console.log("cleared Local Storage");
 
-        let contexts = browser.contextualIdentities.query({
+        let contexts = chrome.contextualIdentities.query({
           name: titlepref
         });
 
         function deepCleanCookies(cookies) {
           for (let cookie of cookies) {
-            var removing = browser.cookies.remove({
+            var removing = chrome.cookies.remove({
               firstPartyDomain: cookie.firstPartyDomain,
               name: cookie.name,
               url: item.url
@@ -301,7 +152,7 @@ function forgetBrowsingData(storedSettings) {
 
         function deepCleanContext(cookieStoreIds) {
           for (let cookieStoreId of cookieStoreIds) {
-            var removing = browser.cookies.getAll({
+            var removing = chrome.cookies.getAll({
               firstPartyDomain: null,
               storeId: cookieStoreId.cookieStoreId
             });
@@ -315,7 +166,7 @@ function forgetBrowsingData(storedSettings) {
     notify();
   }
 
-  var searching = browser.history.search({
+  var searching = chrome.history.search({
     text: "i2p",
     startTime: 0
   });
@@ -349,7 +200,7 @@ function onContextGotLog(contexts) {
   }
 }
 
-browser.runtime.onMessage.addListener(message);
+chrome.runtime.onMessage.addListener(message);
 
 function enableHistory() {
   function checkStoredSettings(storedSettings) {
@@ -358,10 +209,10 @@ function enableHistory() {
     function enablehistory(settings) {
       console.log("Store History:", settings);
     }
-    let setting = browser.storage.local.set(storedSettings);
+    let setting = chrome.storage.local.set(storedSettings);
     setting.then(enablehistory);
   }
-  const gettingStoredSettings = browser.storage.local.get();
+  const gettingStoredSettings = chrome.storage.local.get();
   gettingStoredSettings.then(checkStoredSettings, onError);
 }
 
@@ -372,10 +223,10 @@ function disableHistory() {
     function enablehistory(settings) {
       console.log("Store History:", settings);
     }
-    var setting = browser.storage.local.set(storedSettings);
+    var setting = chrome.storage.local.set(storedSettings);
     setting.then(enablehistory);
   }
-  const gettingStoredSettings = browser.storage.local.get();
+  const gettingStoredSettings = chrome.storage.local.get();
   gettingStoredSettings.then(checkStoredSettings, onError);
 }
 
