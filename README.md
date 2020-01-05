@@ -34,7 +34,10 @@ Step 1: Create an I2P Browsing Profile
  * 1D: Awwwwwww...
  * ![Feel bad.](done.png)
 
-Step 2: Install plugin on profile
+Step 2: Install Extension on profile
+
+ * A work-in-progress I2P extension is part of this repository. Please be
+ patient, a prototype will be available soon.
 
 Pure Terminal Solution, Unix-Only
 ---------------------------------
