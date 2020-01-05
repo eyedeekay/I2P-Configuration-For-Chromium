@@ -2,13 +2,12 @@ var titlepref = chrome.i18n.getMessage("titlePreface");
 
 /* This disables protected content, which is a form of digital restrictions
    management dependent on identifying information */
-function disableDigitalRestrictionsManagement() {
-  /*var gettingInfo = chrome.runtime.getPlatformInfo();
-  gettingInfo.then(got => {
-    if (got.os == "win") {
-      chrome.privacy.websites.protectedContentEnabled.set({ value: false });
-    }
-  });*/
+function disableDigitalRestrictionsManagement(platformInfo) {
+  if (platformInfo.PlatformOs == "android") {
+    chrome.privacy.websites.protectedContentEnabled.set({ value: false });
+  } else if (platformInfo.PlatformOs == "windows") {
+    chrome.privacy.websites.protectedContentEnabled.set({ value: false });
+  }
 }
 
 function setAllPrivacy() {
@@ -28,7 +27,10 @@ function setAllPrivacy() {
 
   chrome.privacy.websites.thirdPartyCookiesAllowed.set({ value: false });
   chrome.privacy.websites.hyperlinkAuditingEnabled.set({ value: false });
+  chrome.privacy.websites.referrersEnabled.set({ value: false });
+  chrome.privacy.websites.doNotTrackEnabled.set({ value: true });
   //disableDigitalRestrictionsManagement()
+  return chrome.runtime.getPlatformInfo(disableDigitalRestrictionsManagement);
 }
 
 setAllPrivacy();
