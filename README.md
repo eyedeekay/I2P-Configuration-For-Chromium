@@ -23,7 +23,7 @@ This solution is probably the easiest for the majority of people, but it may not
 have the best privacy characteristics because it relies on API's and tooling
 that Google makes available via extensions, which is pretty narrow.
 
-Step 1: Create an I2P Browsing Profile
+**Step 1: Create an I2P Browsing Profile**
 
  * 1A: Open the people manager to create your I2P persona within Chromium.
  * ![Open the people manager.](people.png)
@@ -34,7 +34,7 @@ Step 1: Create an I2P Browsing Profile
  * 1D: Awwwwwww...
  * ![Feel bad.](done.png)
 
-Step 2: Install Extension on profile
+**Step 2: Install Extension on profile**
 
  * A work-in-progress I2P extension is part of this repository. Please be
  patient, a prototype will be available soon.
@@ -45,7 +45,8 @@ Pure Terminal Solution, Unix-Only
 This solution uses a shell script to wrap the Chromium executable and apply
 I2P-ready settings.
 
-Step 1: Create a file named /usr/bin/chromium-i2p with the following contents.
+**Step 1: Create a file named /usr/bin/chromium-i2p with the following**
+**contents.**
 
         #! /usr/bin/env sh
         # Launches Chromium, pre-configured for I2P
@@ -87,8 +88,8 @@ router console administration. The rest is just disabling telemetry and features
 which may be fingerprintable in an effort to reduce the granularity available to
 an attacker trying to measure Chromium.
 
-Step 2: To also add a shortcut for incognito mode, create another file named
-/usr/bin/chromium-i2p-incognito with the following contents:
+**Step 2: To also add a shortcut for incognito mode, create another file named**
+**/usr/bin/chromium-i2p-incognito with the following contents:**
 
         #! /usr/bin/env sh
         # Launches Chromium, pre-configured for I2P

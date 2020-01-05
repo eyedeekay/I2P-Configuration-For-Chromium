@@ -11,9 +11,9 @@
   ],
   "manifest_version": 2,
   "name": "__MSG_extensionName__",
-  "version": "1.26",
+  "version": "0.26",
   "description": "__MSG_extensionDescription__",
-  "homepage_url": "https://github.com/eyedeekay/i2psetproxy.js",
+  "homepage_url": "https://github.com/eyedeekay/i2pchrome.js",
   "icons": {
     "48": "icons/toopie.png"
   },
