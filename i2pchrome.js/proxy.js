@@ -78,7 +78,6 @@ function getControlPort() {
 }
 
 function setupProxy() {
-  var controlPort = getControlPort();
   var Host = getHost();
   var Port = getPort();
   var Scheme = getScheme();
@@ -89,8 +88,7 @@ function setupProxy() {
         scheme: Scheme,
         host: Host,
         port: parseInt(Port)
-      },
-      bypassList: ["localhost:" + controlPort, "127.0.0.1:" + controlPort]
+      }
     }
   };
   chrome.proxy.settings.set(

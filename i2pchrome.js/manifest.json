@@ -6,6 +6,7 @@
     "privacy",
     "storage",
     "webRequest",
+    "webRequestBlocking",
     "<all_urls>"
   ],
   "manifest_version": 2,
@@ -27,8 +28,8 @@
   },
   "background": {
     "scripts": [
-      "browser-polyfill.js",
       "background.js",
+      "browser-polyfill.js",
       "proxy.js",
       "info.js",
       "privacy.js"
