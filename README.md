@@ -3,14 +3,15 @@ How to tweak a Chromium-Based Web Browser to work with I2P
 
 This is not a recommendation! This is a much more complicated procedure than
 we wish to recommend to anyone. A great deal of thought went into the design of
-the Firefox plugin, which is safer and better because of the way Mozilla has
-designed and maintained it's webextension privacy API's. Moreover, Chrome is bad
-for the Internet. So is Google. If you **must**, absolutely must, use Chrome,
-then you are part of a different anonymity set, and in all likelihood, unique.
-You are subject to changes in the way Chrome is configured, including possibly
-unstable command-line flags which you might use to configure the proxy. This
-procedure does not make these risks, which are inherent to the use of Chromium,
-any greater or lesser, rather it teaches you to encapsulate a Chromium-based
+the [Firefox extension](https://github.com/eyedeekay/I2P-in-Private-Browsing-Mode-Firefox),
+which is safer and better because of the way Mozilla has designed and maintained
+it's webextension privacy API's. Moreover, Chrome is bad for the Internet. So is
+Google. If you **must**, absolutely must, use Chrome, then you are part of a
+different anonymity set, and in all likelihood, unique. You are subject to
+changes in the way Chrome is configured, including possibly unstable
+command-line flags which you might use to configure the proxy. This procedure
+does not make these risks, which are inherent to the use of Chromium, any
+greater or lesser, rather it teaches you to encapsulate a Chromium-based
 browsing profile for I2P which is the best that is possible to create with
 technology available across all Chromium variants. Also use Chromium or even
 better, ungoogled-chromium because Chrome is an advertising delivery vehicle
