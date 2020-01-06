@@ -3,7 +3,7 @@ How to tweak a Chromium-Based Web Browser to work with I2P
 
 This is not a recommendation! This is a much more complicated procedure than
 we wish to recommend to anyone. A great deal of thought went into the design of
-the [Firefox extension](https://github.com/eyedeekay/I2P-in-Private-Browsing-Mode-Firefox),
+the [Firefox extension](https://eyedeekay.github.io/I2P-in-Private-Browsing-Mode-Firefox/),
 which is safer and better because of the way Mozilla has designed and maintained
 it's webextension privacy API's. Moreover, Chrome is bad for the Internet. So is
 Google. If you **must**, absolutely must, use Chrome, then you are part of a
