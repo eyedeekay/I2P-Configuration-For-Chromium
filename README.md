@@ -17,6 +17,19 @@ technology available across all Chromium variants. Also use Chromium or even
 better, ungoogled-chromium because Chrome is an advertising delivery vehicle
 with trivial browser-like characteristics.
 
+This is an *EXPERIMENTAL* Procedure.
+
+### Don't enable syncing for this Profile
+
+You should not enable the use of a google account or plugin syncing for this
+profile. If you see something like these:
+
+ * **Syncing Options:**
+  - ![sync](sync.png)
+  - ![plugins](plugins.png)
+
+Say no, otherwise you will be sharing your profile data with google!
+
 Profile+Plugin Solution, All Platforms
 --------------------------------------
 
@@ -27,31 +40,20 @@ that Google makes available via extensions, which is pretty narrow.
 **Step 1: Create an I2P Browsing Profile**
 
  * **1A:** Open the people manager to create your I2P persona within Chromium.
- * ![Open the people manager.](people.png)
+  - ![Open the people manager.](people.png)
  * **1B:** Add a person named I2P Browsing Mode.
- * ![Add a person.](manager.png)
+  - ![Add a person.](manager.png)
  * **1C:** Give the person some cool shades to protect them on the *darkweb*.
- * ![Give them some cool shades.](shades.png)
+  - ![Give them some cool shades.](shades.png)
  * **1D:** Awwwwwww...
- * ![Feel bad.](done.png)
+  - ![Feel bad.](done.png)
 
 **Step 2: Install Extension on profile**
 
-*A work-in-progress I2P extension is part of this repository. For now, you*
-*have to side-load it in developer mode because it's definitely unfinished.*
-
- * **2A:** From your new I2P Browsing profile, open the extensions menu.
- * ![Open the browser extensions menu.](extensions.png)
- * **2B:** Turn on developer mode to enable loading the extension.
- * ![Enable developer mode.](developer.png)
- * **2C:** Select "Load Unpacked" to install the extension
- * ![Load the unpacked extension.](unpacked.png)
- * **2D:** Navigate to the extension directory(this directory/i2pchrome.js) and
- install it.
- * ![Open the extension directory.](directory.png)
- * **2E:** If it worked, you will the the plugin installed in your extensions
- menu.
- * ![Verify installation.](finished.png)
+ * **2A:** Open the following link in your I2P Browsing Mode persona and install
+ the extension like you normally would, by clicking the "Install in Chrome"
+ button. This is an *experimental* extension.
+ [i2pchrome.js](https://chrome.google.com/webstore/detail/i2pchromejs/ikdjcmomgldfciocnpekfndklkfgglpe)
 
 Pure Terminal Solution, Unix-Only
 ---------------------------------

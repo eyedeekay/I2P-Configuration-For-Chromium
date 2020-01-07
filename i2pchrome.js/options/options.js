@@ -25,21 +25,26 @@ function SetControlHostText() {
 }
 
 function setupProxy() {
-  var controlHost = getControlHost();
-  var controlPort = getControlPort();
   var Host = getHost();
   var Port = getPort();
   var Scheme = getScheme();
-  function handleProxyRequest(requestInfo) {
-    console.log("proxying request via listener");
-    console.log("   ", Scheme, Host, ":", Port);
-    return { type: Scheme, host: Host, port: Port, proxyDns: true };
-  }
-  console.log("Setting up Firefox WebExtension proxy");
-  browser.proxy.onRequest.addListener(handleProxyRequest, {
-    urls: ["<all_urls>"]
-  });
-  console.log("i2p settings created for WebExtension Proxy");
+  var config = {
+    mode: "fixed_servers",
+    rules: {
+      singleProxy: {
+        scheme: Scheme,
+        host: Host,
+        port: parseInt(Port)
+      }
+    }
+  };
+  chrome.proxy.settings.set(
+    {
+      value: config,
+      scope: "regular"
+    },
+    function() {}
+  );
 }
 
 function SetControlPortText() {
