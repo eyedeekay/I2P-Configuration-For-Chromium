@@ -25,7 +25,7 @@ uninstall:
 clobber:
 	rm -f ../i2pchrome.js.zip ../i2p_proxy*.xpi
 
-VERSION=0.26
+VERSION=0.27
 
 xpi:
 	mv ~/Downloads/i2p_proxy-$(VERSION)-an+fx.xpi ../i2pchrome.js@eyedeekay.github.io.xpi

@@ -35,7 +35,10 @@ document.addEventListener("click", clickEvent => {
   } else if (clickEvent.target.id === "window-visit-homepage") {
     console.log("attempting to create homepage tab");
     goHome();
-  } else if (clickEvent.target.id === "window-visit-i2ptunnel") {
+  } else if (clickEvent.target.id === "window-visit-readme") {
+    console.log("attempting to create readme tab");
+    goIndex();
+  }else if (clickEvent.target.id === "window-visit-i2ptunnel") {
     console.log("attempting to create i2ptunnel tab");
     goTunnel();
   } else if (clickEvent.target.id === "window-visit-susimail") {
@@ -79,12 +82,20 @@ function onTabCreated() {
   console.log("Tab Created");
 }
 
+function goIndex() {
+  let createData = {
+    url: "index.html"
+  };
+  console.log("visiting readme");
+  let creating = chrome.tabs.create(createData);
+}
+
 function goHome() {
-    let createData = {
-      url: "home.html"
-    };
-    console.log("visiting homepage");
-    let creating = chrome.tabs.create(createData);
+  let createData = {
+    url: "home.html"
+  };
+  console.log("visiting homepage");
+  let creating = chrome.tabs.create(createData);
 }
 
 function goTunnel() {
