@@ -79,6 +79,14 @@ function onTabCreated() {
   console.log("Tab Created");
 }
 
+function goHome() {
+    let createData = {
+      url: "home.html"
+    };
+    console.log("visiting homepage");
+    let creating = chrome.tabs.create(createData);
+}
+
 function goTunnel() {
   let createData = {
     url: "http://" + control_host + ":" + control_port + "/i2ptunnel"
