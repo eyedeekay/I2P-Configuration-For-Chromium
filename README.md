@@ -25,8 +25,8 @@ You should not enable the use of a google account or plugin syncing for this
 profile. If you see something like these:
 
  * **Syncing Options:**
-  - ![sync](sync.png)
-  - ![plugins](plugins.png)
+  - ![sync](sync.png) No!
+  - ![plugins](plugins.png) No!
 
 Say no, otherwise you will be sharing your profile data with google!
 
