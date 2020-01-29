@@ -46,7 +46,7 @@ that Google makes available via extensions, which is pretty narrow.
  * **1C:** Give the person some cool shades to protect them on the *darkweb*.
   - ![Give them some cool shades.](shades.png)
  * **1D:** Awwwwwww...
-  - ![Feel bad.](done.png)
+  - ![Feels bad.](done.png)
 
 **Step 2: Install Extension on profile**
 
