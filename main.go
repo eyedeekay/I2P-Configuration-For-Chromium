@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-var EXTENSIONS = []string{"./i2pchrome.js"}
+var EXTENSIONS = []string{"i2pchrome.js"}
 var EXTENSIONHASHES = []string{"hash"}
 var ARGS = []string{
 	"--safebrowsing-disable-download-protection",
