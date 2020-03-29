@@ -29,7 +29,9 @@ var ARGS = []string{
 var CHROMIUM, ERROR = ExtendedChromium("i2pchromium", false, EXTENSIONS, ARGS...)
 
 func main() {
-	if err := Run(); err != nil {
-		log.Fatal(err)
+	if ERROR != nil {
+		log.Fatal(ERROR)
 	}
+	defer CHROMIUM.Close()
+	<-CHROMIUM.Done()
 }
