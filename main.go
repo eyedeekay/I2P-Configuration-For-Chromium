@@ -10,9 +10,7 @@ var EXTENSIONS = []string{"./i2pchrome.js"}
 var CHROMIUM, ERROR = ExtendedChromium("basic", true, EXTENSIONS, "")
 
 func main() {
-    if ERROR != nil {
-        log.Fatal(ERROR)
+    if err := Run(); err != nil {
+        log.Fatal(err)
     }
-    defer CHROMIUM.Close()
-    <-CHROMIUM.Done()
 }
