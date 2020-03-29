@@ -9,7 +9,6 @@ var EXTENSIONS = []string{"./i2pchrome.js"}
 var ARGS = []string{
 	"--safebrowsing-disable-download-protection",
 	"--disable-client-side-phishing-detection",
-	"--no-startup-window",
 	"--disable-3d-apis",
 	"--disable-accelerated-2d-canvas",
 	"--disable-remote-fonts",
