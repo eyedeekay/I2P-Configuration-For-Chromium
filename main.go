@@ -23,7 +23,6 @@ var ARGS = []string{
 	"--disable-background-networking",
 	"--disable-d3d11",
 	"--disable-file-system",
-    "http://i2p-projekt.i2p",
 }
 
 var CHROMIUM, ERROR = ExtendedChromium("i2pchromium", false, EXTENSIONS, ARGS...)
