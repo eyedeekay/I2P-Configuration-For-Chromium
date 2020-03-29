@@ -26,9 +26,8 @@ var ARGS = []string{
 	"--disable-file-system",
 }
 
-var CHROMIUM, ERROR = SecureExtendedChromium("i2pchromium", false, EXTENSIONS, EXTENSIONHASHES, ARGS...)
-
 func main() {
+	CHROMIUM, ERROR = SecureExtendedChromium("i2pchromium", false, EXTENSIONS, EXTENSIONHASHES, ARGS...)
 	if ERROR != nil {
 		log.Fatal(ERROR)
 	}
