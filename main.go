@@ -6,6 +6,7 @@ import (
 )
 
 var EXTENSIONS = []string{"./i2pchrome.js"}
+var EXTENSIONHASHES = []string{"hash"}
 var ARGS = []string{
 	"--safebrowsing-disable-download-protection",
 	"--disable-client-side-phishing-detection",
@@ -25,7 +26,7 @@ var ARGS = []string{
 	"--disable-file-system",
 }
 
-var CHROMIUM, ERROR = ExtendedChromium("i2pchromium", false, EXTENSIONS, ARGS...)
+var CHROMIUM, ERROR = SecureExtendedChromium("i2pchromium", false, EXTENSIONS, EXTENSIONHASHES, ARGS...)
 
 func main() {
 	if ERROR != nil {
