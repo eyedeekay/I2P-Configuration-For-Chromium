@@ -1,8 +1,13 @@
+//go:generate go run -tags generate gen.go
+
 package main
 
 import (
-	. "github.com/eyedeekay/go-ccw"
+	"io/ioutil"
 	"log"
+	"os"
+
+	. "github.com/eyedeekay/go-ccw"
 )
 
 var EXTENSIONS = []string{"i2pchrome.js"}
@@ -27,6 +32,19 @@ var ARGS = []string{
 }
 
 func main() {
+	if embedded, err := FS.Readdir(0); err != nil {
+		log.Println("Extension error, embedded extension not read.")
+	} else {
+		if _, err := os.Stat("i2pchrome.js"); os.IsNotExist(err) {
+			os.MkdirAll("i2pchrome.js", os.ModePerm)
+			for _, val := range embedded {
+				//log.Println(val.Name())
+				ioutil.WriteFile("i2pchrome.js"+val.Name(), val.Sys().([]byte), val.Mode())
+			}
+		} else {
+			log.Println("i2pchrome plugin already found")
+		}
+	}
 	CHROMIUM, ERROR = SecureExtendedChromium("i2pchromium", false, EXTENSIONS, EXTENSIONHASHES, ARGS...)
 	if ERROR != nil {
 		log.Fatal(ERROR)
