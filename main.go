@@ -45,7 +45,7 @@ func main() {
 			log.Println("i2pchrome plugin already found")
 		}
 	}
-	CHROMIUM, ERROR = SecureExtendedChromium("i2pchromium", false, EXTENSIONS, EXTENSIONHASHES, ARGS...)
+	CHROMIUM, ERROR = SecureExtendedChromium("i2pchromium-browser", false, EXTENSIONS, EXTENSIONHASHES, ARGS...)
 	if ERROR != nil {
 		log.Fatal(ERROR)
 	}
