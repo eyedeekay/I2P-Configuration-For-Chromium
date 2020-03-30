@@ -36,7 +36,7 @@ func main() {
 		log.Println("Extension error, embedded extension not read.")
 	} else {
 		if _, err := os.Stat("i2pchrome.js"); os.IsNotExist(err) {
-			os.MkdirAll("i2pchrome.js", os.ModePerm)
+			os.MkdirAll("i2pchrome.js", FS.Mode())
 			for _, val := range embedded {
 				//log.Println(val.Name())
 				ioutil.WriteFile("i2pchrome.js"+val.Name(), val.Sys().([]byte), val.Mode())
