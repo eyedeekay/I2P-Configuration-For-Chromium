@@ -75,7 +75,6 @@ I2P-ready settings.
           --user-data-dir=$HOME/WebApps/i2padmin \
           --safebrowsing-disable-download-protection \
           --disable-client-side-phishing-detection \
-          --no-startup-window \
           --disable-3d-apis \
           --disable-accelerated-2d-canvas \
           --disable-remote-fonts \
