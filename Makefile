@@ -1,10 +1,13 @@
 
 VERSION=0.0.01
 
-all:
+all: gen
 	GOOS=windows go build -o i2pchromium.exe
 	GOOS=darwin go build -o i2pchromium-darwin
 	GOOS=linux go build -o i2pchromium
+
+gen:
+	go run -tags generate gen.go
 
 release:
 	gothub release -p -u eyedeekay -r "I2P-Configuration-for-Chromium" -t $(VERSION) -n "Launchers" -d "A self-configuring launcher for I2P Browsing with Chromium"; true

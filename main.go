@@ -3,8 +3,11 @@
 package main
 
 import (
+	"bytes"
+	"io"
 	"io/ioutil"
 	"log"
+	"net/http"
 	"os"
 
 	. "github.com/eyedeekay/go-ccw"
@@ -31,19 +34,81 @@ var ARGS = []string{
 	"--disable-file-system",
 }
 
-func main() {
-	if embedded, err := FS.Readdir(0); err != nil {
+func writeSubDirectory(fs http.File) {
+	log.Println("writing subdirectory")
+	name, err := fs.Stat()
+	if err != nil {
+		log.Fatal(err)
+	}
+	if embedded, err := fs.Readdir(0); err != nil {
 		log.Println("Extension error, embedded extension not read.")
 	} else {
 		if _, err := os.Stat("i2pchrome.js"); os.IsNotExist(err) {
-			os.MkdirAll("i2pchrome.js", FS.Mode())
+			os.MkdirAll("i2pchrome.js/"+name.Name(), FS.Mode())
 			for _, val := range embedded {
-				ioutil.WriteFile("i2pchrome.js"+val.Name(), val.Sys().([]byte), val.Mode())
+				file, err := FS.Open(val.Name()) //
+				if err != nil {
+					log.Fatal(err.Error())
+				}
+				sys := bytes.NewBuffer(nil)
+				if _, err := io.Copy(sys, file); err != nil {
+					log.Fatal(err.Error())
+				}
+				ioutil.WriteFile("i2pchrome.js/"+name.Name()+"/"+val.Name(), sys.Bytes(), val.Mode())
 			}
 		} else {
 			log.Println("i2pchrome plugin already found")
 		}
 	}
+}
+
+func writeExtension(val os.FileInfo, system http.FileSystem) {
+	if len(val.Name()) > 3 {
+		if val.IsDir() {
+			os.MkdirAll("i2pchrome.js/"+val.Name(), FS.Mode())
+			file, err := FS.Open(val.Name()) //
+			if err != nil {
+				log.Fatal(err.Error())
+			}
+			writeSubDirectory(file)
+		} else {
+			log.Println("Writing file to extension", val.Name())
+			file, err := FS.Open(val.Name()) //
+			if err != nil {
+				log.Fatal(err.Error())
+			}
+			sys := bytes.NewBuffer(nil)
+			if _, err := io.Copy(sys, file); err != nil {
+				log.Fatal(err.Error())
+			}
+			if err := ioutil.WriteFile("i2pchrome.js/"+val.Name(), sys.Bytes(), val.Mode()); err != nil {
+				log.Fatal(err.Error())
+			}
+		}
+	} else {
+		log.Println("+i2pchrome.js/"+val.Name()+"'", "ignored", "contents", val.Sys())
+	}
+}
+
+func writeProfile(system http.FileSystem) {
+	if embedded, err := FS.Readdir(0); err != nil {
+		log.Println("Extension error, embedded extension not read.")
+	} else {
+		if _, err := os.Stat("i2pchrome.js"); os.IsNotExist(err) {
+			os.MkdirAll("i2pchrome.js/icons", FS.Mode())
+			os.MkdirAll("i2pchrome.js/options", FS.Mode())
+			os.MkdirAll("i2pchrome.js/_locales/en", FS.Mode())
+			for _, val := range embedded {
+				writeExtension(val, FS)
+			}
+		} else {
+			log.Println("i2pchrome plugin already found")
+		}
+	}
+}
+
+func main() {
+	writeProfile(FS)
 	CHROMIUM, ERROR = SecureExtendedChromium("i2pchromium-browser", false, EXTENSIONS, EXTENSIONHASHES, ARGS...)
 	if ERROR != nil {
 		log.Fatal(ERROR)
