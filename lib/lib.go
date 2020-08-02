@@ -2,11 +2,14 @@ package i2pchrome
 
 import (
 	"bytes"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
 
 	. "github.com/eyedeekay/go-ccw"
 )
@@ -68,7 +71,7 @@ func ChromiumWriteExtension(val os.FileInfo, system http.FileSystem) {
 			if err != nil {
 				log.Fatal(err.Error())
 			}
-			writeSubDirectory(file)
+			ChromiumWriteSubDirectory(file)
 		} else {
 			log.Println("Writing file to extension", val.Name())
 			file, err := FS.Open(val.Name()) //
@@ -97,7 +100,7 @@ func ChromiumWriteProfile(system http.FileSystem) {
 			os.MkdirAll("i2pchrome.js/options", FS.Mode())
 			os.MkdirAll("i2pchrome.js/_locales/en", FS.Mode())
 			for _, val := range embedded {
-				writeExtension(val, FS)
+				ChromiumWriteExtension(val, FS)
 			}
 		} else {
 			log.Println("i2pchrome plugin already found")
@@ -106,7 +109,7 @@ func ChromiumWriteProfile(system http.FileSystem) {
 }
 
 func ChromiumMain() {
-	writeProfile(FS)
+	ChromiumWriteProfile(FS)
 	CHROMIUM, ERROR = SecureExtendedChromium("i2pchromium-browser", false, EXTENSIONS, EXTENSIONHASHES, ARGS...)
 	if ERROR != nil {
 		log.Fatal(ERROR)
