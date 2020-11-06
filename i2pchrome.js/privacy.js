@@ -42,16 +42,18 @@ function setAllPrivacy() {
     chrome.privacy.websites.hyperlinkAuditingEnabled.set({ value: false });
     chrome.privacy.websites.referrersEnabled.set({ value: false });
     //chrome.privacy.services.hotwordSearchEnabled.set({ value: false });
-  }else{
+  } else {
     browser.privacy.websites.hyperlinkAuditingEnabled.set({ value: false });
     browser.privacy.websites.firstPartyIsolate.set({ value: true });
     browser.privacy.websites.resistFingerprinting.set({ value: true });
-//    browser.privacy.websites.thirdPartyCookiesAllowed.set({ value: false });
+    //    browser.privacy.websites.thirdPartyCookiesAllowed.set({ value: false });
     browser.privacy.websites.trackingProtectionMode.set({ value: true });
-    browser.privacy.websites.cookieConfig.set( { value: { 
-      behavior: "reject_third_party",
-      nonPersistentCookies: true
-    } })
+    browser.privacy.websites.cookieConfig.set({
+      value: {
+        behavior: "reject_third_party",
+        nonPersistentCookies: true,
+      },
+    });
     browser.privacy.network.networkPredictionEnabled.set({ value: false });
   }
   return chrome.runtime.getPlatformInfo(disableDigitalRestrictionsManagement);
