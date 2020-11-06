@@ -10,26 +10,50 @@ function disableDigitalRestrictionsManagement(platformInfo) {
   }
 }
 
+function getBrowser() {
+  if (typeof chrome !== "undefined") {
+    if (typeof browser !== "undefined") {
+      return "Firefox";
+    } else {
+      return "Chrome";
+    }
+  } else {
+    return "Chrome";
+  } /* else {
+    return "Edge";
+  }*/
+}
+
 function setAllPrivacy() {
   chrome.privacy.network.networkPredictionEnabled.set({ value: false });
-
-  chrome.privacy.services.alternateErrorPagesEnabled.set({ value: false });
-  chrome.privacy.services.autofillEnabled.set({ value: false });
-  //chrome.privacy.services.hotwordSearchEnabled.set({ value: false });
-  chrome.privacy.services.passwordSavingEnabled.set({ value: false });
-  chrome.privacy.services.safeBrowsingEnabled.set({ value: false });
-  chrome.privacy.services.safeBrowsingExtendedReportingEnabled.set({
-    value: false
-  });
-  chrome.privacy.services.searchSuggestEnabled.set({ value: false });
-  chrome.privacy.services.spellingServiceEnabled.set({ value: false });
-  chrome.privacy.services.translationServiceEnabled.set({ value: false });
-
-  chrome.privacy.websites.thirdPartyCookiesAllowed.set({ value: false });
-  chrome.privacy.websites.hyperlinkAuditingEnabled.set({ value: false });
-  chrome.privacy.websites.referrersEnabled.set({ value: false });
-  chrome.privacy.websites.doNotTrackEnabled.set({ value: true });
-  //disableDigitalRestrictionsManagement()
+  if (getBrowser() == "Chrome") {
+    chrome.privacy.services.alternateErrorPagesEnabled.set({ value: false });
+    chrome.privacy.services.autofillEnabled.set({ value: false });
+    chrome.privacy.services.passwordSavingEnabled.set({ value: false });
+    chrome.privacy.services.safeBrowsingEnabled.set({ value: false });
+    chrome.privacy.services.safeBrowsingExtendedReportingEnabled.set({
+      value: false,
+    });
+    chrome.privacy.services.searchSuggestEnabled.set({ value: false });
+    chrome.privacy.services.spellingServiceEnabled.set({ value: false });
+    chrome.privacy.services.translationServiceEnabled.set({ value: false });
+    chrome.privacy.websites.thirdPartyCookiesAllowed.set({ value: false });
+    chrome.privacy.websites.doNotTrackEnabled.set({ value: true });
+    chrome.privacy.websites.hyperlinkAuditingEnabled.set({ value: false });
+    chrome.privacy.websites.referrersEnabled.set({ value: false });
+    //chrome.privacy.services.hotwordSearchEnabled.set({ value: false });
+  }else{
+    browser.privacy.websites.hyperlinkAuditingEnabled.set({ value: false });
+    browser.privacy.websites.firstPartyIsolate.set({ value: true });
+    browser.privacy.websites.resistFingerprinting.set({ value: true });
+//    browser.privacy.websites.thirdPartyCookiesAllowed.set({ value: false });
+    browser.privacy.websites.trackingProtectionMode.set({ value: true });
+    browser.privacy.websites.cookieConfig.set( { value: { 
+      behavior: "reject_third_party",
+      nonPersistentCookies: true
+    } })
+    browser.privacy.network.networkPredictionEnabled.set({ value: false });
+  }
   return chrome.runtime.getPlatformInfo(disableDigitalRestrictionsManagement);
 }
 
@@ -46,7 +70,7 @@ function EnablePeerConnection() {
 
 function AssurePeerConnection() {
   chrome.privacy.network.webRTCIPHandlingPolicy.set({
-    value: "disable_non_proxied_udp"
+    value: "disable_non_proxied_udp",
   });
 }
 
@@ -54,7 +78,7 @@ chrome.tabs.onCreated.addListener(AssurePeerConnection);
 
 var defaultSettings = {
   since: "forever",
-  dataTypes: ["downloads", "passwords", "formData", "localStorage", "history"]
+  dataTypes: ["downloads", "passwords", "formData", "localStorage", "history"],
 };
 
 function onError(therror) {
@@ -70,7 +94,7 @@ function forgetBrowsingData(storedSettings) {
     const times = {
       hour: () => 1000 * 60 * 60,
       day: () => 1000 * 60 * 60 * 24,
-      week: () => 1000 * 60 * 60 * 24 * 7
+      week: () => 1000 * 60 * 60 * 24 * 7,
     };
 
     const sinceMilliseconds = times[selectedSince].call();
@@ -94,7 +118,7 @@ function forgetBrowsingData(storedSettings) {
     chrome.notifications.create({
       type: "basic",
       title: "Removed browsing data",
-      message: `Removed ${dataTypesString}\n for I2P Browsing`
+      message: `Removed ${dataTypesString}\n for I2P Browsing`,
     });
   }
 
@@ -103,41 +127,41 @@ function forgetBrowsingData(storedSettings) {
     for (let item of historyItems) {
       if (i2pHost(item.url)) {
         chrome.history.deleteUrl({
-          url: item.url
+          url: item.url,
         });
         chrome.browsingData.removeCache({});
         console.log("cleared Cache");
         chrome.browsingData
           .removePasswords({
             hostnames: [i2pHostName(item.url)],
-            since
+            since,
           })
           .then(onContextGotLog);
         console.log("cleared Passwords");
         chrome.browsingData
           .removeDownloads({
             hostnames: [i2pHostName(item.url)],
-            since
+            since,
           })
           .then(onContextGotLog);
         console.log("cleared Downloads");
         chrome.browsingData
           .removeFormData({
             hostnames: [i2pHostName(item.url)],
-            since
+            since,
           })
           .then(onContextGotLog);
         console.log("cleared Form Data");
         chrome.browsingData
           .removeLocalStorage({
             hostnames: [i2pHostName(item.url)],
-            since
+            since,
           })
           .then(onContextGotLog);
         console.log("cleared Local Storage");
 
         let contexts = chrome.contextualIdentities.query({
-          name: titlepref
+          name: titlepref,
         });
 
         function deepCleanCookies(cookies) {
@@ -145,7 +169,7 @@ function forgetBrowsingData(storedSettings) {
             var removing = chrome.cookies.remove({
               firstPartyDomain: cookie.firstPartyDomain,
               name: cookie.name,
-              url: item.url
+              url: item.url,
             });
             removing.then(onContextGotLog, onError);
           }
@@ -156,7 +180,7 @@ function forgetBrowsingData(storedSettings) {
           for (let cookieStoreId of cookieStoreIds) {
             var removing = chrome.cookies.getAll({
               firstPartyDomain: null,
-              storeId: cookieStoreId.cookieStoreId
+              storeId: cookieStoreId.cookieStoreId,
             });
             removing.then(deepCleanCookies, onError);
           }
@@ -170,7 +194,7 @@ function forgetBrowsingData(storedSettings) {
 
   var searching = chrome.history.search({
     text: "i2p",
-    startTime: 0
+    startTime: 0,
   });
 
   searching.then(deepCleanHistory);

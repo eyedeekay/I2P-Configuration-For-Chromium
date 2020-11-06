@@ -16,7 +16,7 @@ function isDroid() {
 
 chrome.privacy.network.networkPredictionEnabled.set({ value: false });
 chrome.privacy.network.webRTCIPHandlingPolicy.set({
-  value: "disable_non_proxied_udp"
+  value: "disable_non_proxied_udp",
 });
 
 console.log("Preliminarily disabled WebRTC.");
@@ -77,27 +77,55 @@ function getControlPort() {
   return control_port;
 }
 
+function getBrowser() {
+  if (typeof chrome !== "undefined") {
+    if (typeof browser !== "undefined") {
+      return "Firefox";
+    } else {
+      return "Chrome";
+    }
+  } else {
+    return "Chrome";
+  } /* else {
+    return "Edge";
+  }*/
+}
+
 function setupProxy() {
   var Host = getHost();
   var Port = getPort();
   var Scheme = getScheme();
-  var config = {
-    mode: "fixed_servers",
-    rules: {
-      singleProxy: {
-        scheme: Scheme,
-        host: Host,
-        port: parseInt(Port)
-      }
-    }
-  };
-  chrome.proxy.settings.set(
-    {
-      value: config,
-      scope: "regular"
-    },
-    function() {}
-  );
+  function handleProxyRequest(requestInfo) {
+    return { type: Scheme, host: Host, port: Port };
+  }
+  if (getBrowser() == "Firefox") {
+    console.log("Registering Firefox proxy", {
+      type: Scheme,
+      host: Host,
+      port: Port,
+    });
+    browser.proxy.onRequest.addListener(handleProxyRequest, {
+      urls: ["<all_urls>"],
+    });
+  } else {
+    var config = {
+      mode: "fixed_servers",
+      rules: {
+        singleProxy: {
+          scheme: Scheme,
+          host: Host,
+          port: parseInt(Port),
+        },
+      },
+    };
+    chrome.proxy.settings.set(
+      {
+        value: config,
+        scope: "regular",
+      },
+      function () {}
+    );
+  }
 }
 
 function checkStoredSettings(storedSettings) {
@@ -133,7 +161,7 @@ function update(restoredSettings) {
   console.log("restoring control port:", control_port);
 }
 
-chrome.storage.local.get(function(got) {
+chrome.storage.local.get(function (got) {
   checkStoredSettings(got);
   update(got);
   setupProxy();

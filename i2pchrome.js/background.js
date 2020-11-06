@@ -39,7 +39,7 @@ function isRouterHost(url) {
 }
 
 chrome.webRequest.onBeforeRequest.addListener(
-  function(details) {
+  function (details) {
     let localhost = isLocalHost(details.url);
     let routerhost = isRouterHost(details.url);
     console.log("localhost: ", localhost, "routerhost: ", routerhost);

@@ -1,8 +1,8 @@
-document.addEventListener("click", clickEvent => {
+document.addEventListener("click", (clickEvent) => {
   if (clickEvent.target.id === "window-create-help-panel") {
     let createData = {
       type: "panel",
-      incognito: true
+      incognito: true,
     };
     let creating = chrome.tabs.create(createData);
     creating.then(() => {
@@ -11,7 +11,7 @@ document.addEventListener("click", clickEvent => {
   } else if (clickEvent.target.id === "window-create-news-panel") {
     let createData = {
       type: "panel",
-      incognito: true
+      incognito: true,
     };
     let creating = chrome.tabs.create(createData);
     creating.then(() => {
@@ -24,7 +24,7 @@ document.addEventListener("click", clickEvent => {
       const url = "http://" + controlHost + ":" + controlPort;
       Http.open("GET", url);
       Http.send();
-      Http.onreadystatechange = event => {
+      Http.onreadystatechange = (event) => {
         console.log(Http.responseText);
       };
     }
@@ -38,7 +38,7 @@ document.addEventListener("click", clickEvent => {
   } else if (clickEvent.target.id === "window-visit-readme") {
     console.log("attempting to create readme tab");
     goIndex();
-  }else if (clickEvent.target.id === "window-visit-i2ptunnel") {
+  } else if (clickEvent.target.id === "window-visit-i2ptunnel") {
     console.log("attempting to create i2ptunnel tab");
     goTunnel();
   } else if (clickEvent.target.id === "window-visit-susimail") {
@@ -84,7 +84,7 @@ function onTabCreated() {
 
 function goIndex() {
   let createData = {
-    url: "index.html"
+    url: "index.html",
   };
   console.log("visiting readme");
   let creating = chrome.tabs.create(createData);
@@ -92,7 +92,7 @@ function goIndex() {
 
 function goHome() {
   let createData = {
-    url: "home.html"
+    url: "home.html",
   };
   console.log("visiting homepage");
   let creating = chrome.tabs.create(createData);
@@ -100,7 +100,7 @@ function goHome() {
 
 function goTunnel() {
   let createData = {
-    url: "http://" + control_host + ":" + control_port + "/i2ptunnel"
+    url: "http://" + control_host + ":" + control_port + "/i2ptunnel",
   };
   console.log("visiting i2ptunnel");
   let creating = chrome.tabs.create(createData);
@@ -108,7 +108,7 @@ function goTunnel() {
 
 function goMail() {
   let createData = {
-    url: "http://" + control_host + ":" + control_port + "/susimail"
+    url: "http://" + control_host + ":" + control_port + "/susimail",
   };
   console.log("visiting mail");
   let creating = chrome.tabs.create(createData);
@@ -116,7 +116,7 @@ function goMail() {
 
 function goSnark() {
   let createData = {
-    url: "http://" + control_host + ":" + control_port + "/i2psnark"
+    url: "http://" + control_host + ":" + control_port + "/i2psnark",
   };
   console.log("visiting snark");
   let creating = chrome.tabs.create(createData);

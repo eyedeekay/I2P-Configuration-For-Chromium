@@ -1,11 +1,11 @@
-(function(global, factory) {
+(function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define("webextension-polyfill", ["module"], factory);
   } else if (typeof exports !== "undefined") {
     factory(module);
   } else {
     var mod = {
-      exports: {}
+      exports: {},
     };
     factory(mod);
     global.browser = mod.exports;
@@ -16,7 +16,7 @@
     : typeof self !== "undefined"
     ? self
     : this,
-  function(module) {
+  function (module) {
     /* webextension-polyfill - v0.6.0 - Mon Dec 23 2019 12:32:53 */
 
     /* -*- Mode: indent-tabs-mode: nil; js-indent-level: 2 -*- */
@@ -41,7 +41,7 @@
       // never actually need to be called, this allows the polyfill to be included
       // in Firefox nearly for free.
 
-      const wrapAPIs = extensionAPIs => {
+      const wrapAPIs = (extensionAPIs) => {
         // NOTE: apiMetadata is associated to the content of the api-metadata.json file
         // at build time by replacing the following "include" with the content of the
         // JSON file.
@@ -49,659 +49,659 @@
           alarms: {
             clear: {
               minArgs: 0,
-              maxArgs: 1
+              maxArgs: 1,
             },
             clearAll: {
               minArgs: 0,
-              maxArgs: 0
+              maxArgs: 0,
             },
             get: {
               minArgs: 0,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getAll: {
               minArgs: 0,
-              maxArgs: 0
-            }
+              maxArgs: 0,
+            },
           },
           bookmarks: {
             create: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             get: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getChildren: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getRecent: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getSubTree: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getTree: {
               minArgs: 0,
-              maxArgs: 0
+              maxArgs: 0,
             },
             move: {
               minArgs: 2,
-              maxArgs: 2
+              maxArgs: 2,
             },
             remove: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             removeTree: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             search: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             update: {
               minArgs: 2,
-              maxArgs: 2
-            }
+              maxArgs: 2,
+            },
           },
           browserAction: {
             disable: {
               minArgs: 0,
               maxArgs: 1,
-              fallbackToNoCallback: true
+              fallbackToNoCallback: true,
             },
             enable: {
               minArgs: 0,
               maxArgs: 1,
-              fallbackToNoCallback: true
+              fallbackToNoCallback: true,
             },
             getBadgeBackgroundColor: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getBadgeText: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getPopup: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getTitle: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             openPopup: {
               minArgs: 0,
-              maxArgs: 0
+              maxArgs: 0,
             },
             setBadgeBackgroundColor: {
               minArgs: 1,
               maxArgs: 1,
-              fallbackToNoCallback: true
+              fallbackToNoCallback: true,
             },
             setBadgeText: {
               minArgs: 1,
               maxArgs: 1,
-              fallbackToNoCallback: true
+              fallbackToNoCallback: true,
             },
             setIcon: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             setPopup: {
               minArgs: 1,
               maxArgs: 1,
-              fallbackToNoCallback: true
+              fallbackToNoCallback: true,
             },
             setTitle: {
               minArgs: 1,
               maxArgs: 1,
-              fallbackToNoCallback: true
-            }
+              fallbackToNoCallback: true,
+            },
           },
           browsingData: {
             remove: {
               minArgs: 2,
-              maxArgs: 2
+              maxArgs: 2,
             },
             removeCache: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             removeCookies: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             removeDownloads: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             removeFormData: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             removeHistory: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             removeLocalStorage: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             removePasswords: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             removePluginData: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             settings: {
               minArgs: 0,
-              maxArgs: 0
-            }
+              maxArgs: 0,
+            },
           },
           commands: {
             getAll: {
               minArgs: 0,
-              maxArgs: 0
-            }
+              maxArgs: 0,
+            },
           },
           contextMenus: {
             remove: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             removeAll: {
               minArgs: 0,
-              maxArgs: 0
+              maxArgs: 0,
             },
             update: {
               minArgs: 2,
-              maxArgs: 2
-            }
+              maxArgs: 2,
+            },
           },
           cookies: {
             get: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getAll: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getAllCookieStores: {
               minArgs: 0,
-              maxArgs: 0
+              maxArgs: 0,
             },
             remove: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             set: {
               minArgs: 1,
-              maxArgs: 1
-            }
+              maxArgs: 1,
+            },
           },
           devtools: {
             inspectedWindow: {
               eval: {
                 minArgs: 1,
                 maxArgs: 2,
-                singleCallbackArg: false
-              }
+                singleCallbackArg: false,
+              },
             },
             panels: {
               create: {
                 minArgs: 3,
                 maxArgs: 3,
-                singleCallbackArg: true
-              }
-            }
+                singleCallbackArg: true,
+              },
+            },
           },
           downloads: {
             cancel: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             download: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             erase: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getFileIcon: {
               minArgs: 1,
-              maxArgs: 2
+              maxArgs: 2,
             },
             open: {
               minArgs: 1,
               maxArgs: 1,
-              fallbackToNoCallback: true
+              fallbackToNoCallback: true,
             },
             pause: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             removeFile: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             resume: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             search: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             show: {
               minArgs: 1,
               maxArgs: 1,
-              fallbackToNoCallback: true
-            }
+              fallbackToNoCallback: true,
+            },
           },
           extension: {
             isAllowedFileSchemeAccess: {
               minArgs: 0,
-              maxArgs: 0
+              maxArgs: 0,
             },
             isAllowedIncognitoAccess: {
               minArgs: 0,
-              maxArgs: 0
-            }
+              maxArgs: 0,
+            },
           },
           history: {
             addUrl: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             deleteAll: {
               minArgs: 0,
-              maxArgs: 0
+              maxArgs: 0,
             },
             deleteRange: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             deleteUrl: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getVisits: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             search: {
               minArgs: 1,
-              maxArgs: 1
-            }
+              maxArgs: 1,
+            },
           },
           i18n: {
             detectLanguage: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getAcceptLanguages: {
               minArgs: 0,
-              maxArgs: 0
-            }
+              maxArgs: 0,
+            },
           },
           identity: {
             launchWebAuthFlow: {
               minArgs: 1,
-              maxArgs: 1
-            }
+              maxArgs: 1,
+            },
           },
           idle: {
             queryState: {
               minArgs: 1,
-              maxArgs: 1
-            }
+              maxArgs: 1,
+            },
           },
           management: {
             get: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getAll: {
               minArgs: 0,
-              maxArgs: 0
+              maxArgs: 0,
             },
             getSelf: {
               minArgs: 0,
-              maxArgs: 0
+              maxArgs: 0,
             },
             setEnabled: {
               minArgs: 2,
-              maxArgs: 2
+              maxArgs: 2,
             },
             uninstallSelf: {
               minArgs: 0,
-              maxArgs: 1
-            }
+              maxArgs: 1,
+            },
           },
           notifications: {
             clear: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             create: {
               minArgs: 1,
-              maxArgs: 2
+              maxArgs: 2,
             },
             getAll: {
               minArgs: 0,
-              maxArgs: 0
+              maxArgs: 0,
             },
             getPermissionLevel: {
               minArgs: 0,
-              maxArgs: 0
+              maxArgs: 0,
             },
             update: {
               minArgs: 2,
-              maxArgs: 2
-            }
+              maxArgs: 2,
+            },
           },
           pageAction: {
             getPopup: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getTitle: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             hide: {
               minArgs: 1,
               maxArgs: 1,
-              fallbackToNoCallback: true
+              fallbackToNoCallback: true,
             },
             setIcon: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             setPopup: {
               minArgs: 1,
               maxArgs: 1,
-              fallbackToNoCallback: true
+              fallbackToNoCallback: true,
             },
             setTitle: {
               minArgs: 1,
               maxArgs: 1,
-              fallbackToNoCallback: true
+              fallbackToNoCallback: true,
             },
             show: {
               minArgs: 1,
               maxArgs: 1,
-              fallbackToNoCallback: true
-            }
+              fallbackToNoCallback: true,
+            },
           },
           permissions: {
             contains: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getAll: {
               minArgs: 0,
-              maxArgs: 0
+              maxArgs: 0,
             },
             remove: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             request: {
               minArgs: 1,
-              maxArgs: 1
-            }
+              maxArgs: 1,
+            },
           },
           runtime: {
             getBackgroundPage: {
               minArgs: 0,
-              maxArgs: 0
+              maxArgs: 0,
             },
             getPlatformInfo: {
               minArgs: 0,
-              maxArgs: 0
+              maxArgs: 0,
             },
             openOptionsPage: {
               minArgs: 0,
-              maxArgs: 0
+              maxArgs: 0,
             },
             requestUpdateCheck: {
               minArgs: 0,
-              maxArgs: 0
+              maxArgs: 0,
             },
             sendMessage: {
               minArgs: 1,
-              maxArgs: 3
+              maxArgs: 3,
             },
             sendNativeMessage: {
               minArgs: 2,
-              maxArgs: 2
+              maxArgs: 2,
             },
             setUninstallURL: {
               minArgs: 1,
-              maxArgs: 1
-            }
+              maxArgs: 1,
+            },
           },
           sessions: {
             getDevices: {
               minArgs: 0,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getRecentlyClosed: {
               minArgs: 0,
-              maxArgs: 1
+              maxArgs: 1,
             },
             restore: {
               minArgs: 0,
-              maxArgs: 1
-            }
+              maxArgs: 1,
+            },
           },
           storage: {
             local: {
               clear: {
                 minArgs: 0,
-                maxArgs: 0
+                maxArgs: 0,
               },
               get: {
                 minArgs: 0,
-                maxArgs: 1
+                maxArgs: 1,
               },
               getBytesInUse: {
                 minArgs: 0,
-                maxArgs: 1
+                maxArgs: 1,
               },
               remove: {
                 minArgs: 1,
-                maxArgs: 1
+                maxArgs: 1,
               },
               set: {
                 minArgs: 1,
-                maxArgs: 1
-              }
+                maxArgs: 1,
+              },
             },
             managed: {
               get: {
                 minArgs: 0,
-                maxArgs: 1
+                maxArgs: 1,
               },
               getBytesInUse: {
                 minArgs: 0,
-                maxArgs: 1
-              }
+                maxArgs: 1,
+              },
             },
             sync: {
               clear: {
                 minArgs: 0,
-                maxArgs: 0
+                maxArgs: 0,
               },
               get: {
                 minArgs: 0,
-                maxArgs: 1
+                maxArgs: 1,
               },
               getBytesInUse: {
                 minArgs: 0,
-                maxArgs: 1
+                maxArgs: 1,
               },
               remove: {
                 minArgs: 1,
-                maxArgs: 1
+                maxArgs: 1,
               },
               set: {
                 minArgs: 1,
-                maxArgs: 1
-              }
-            }
+                maxArgs: 1,
+              },
+            },
           },
           tabs: {
             captureVisibleTab: {
               minArgs: 0,
-              maxArgs: 2
+              maxArgs: 2,
             },
             create: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             detectLanguage: {
               minArgs: 0,
-              maxArgs: 1
+              maxArgs: 1,
             },
             discard: {
               minArgs: 0,
-              maxArgs: 1
+              maxArgs: 1,
             },
             duplicate: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             executeScript: {
               minArgs: 1,
-              maxArgs: 2
+              maxArgs: 2,
             },
             get: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getCurrent: {
               minArgs: 0,
-              maxArgs: 0
+              maxArgs: 0,
             },
             getZoom: {
               minArgs: 0,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getZoomSettings: {
               minArgs: 0,
-              maxArgs: 1
+              maxArgs: 1,
             },
             highlight: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             insertCSS: {
               minArgs: 1,
-              maxArgs: 2
+              maxArgs: 2,
             },
             move: {
               minArgs: 2,
-              maxArgs: 2
+              maxArgs: 2,
             },
             query: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             reload: {
               minArgs: 0,
-              maxArgs: 2
+              maxArgs: 2,
             },
             remove: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             removeCSS: {
               minArgs: 1,
-              maxArgs: 2
+              maxArgs: 2,
             },
             sendMessage: {
               minArgs: 2,
-              maxArgs: 3
+              maxArgs: 3,
             },
             setZoom: {
               minArgs: 1,
-              maxArgs: 2
+              maxArgs: 2,
             },
             setZoomSettings: {
               minArgs: 1,
-              maxArgs: 2
+              maxArgs: 2,
             },
             update: {
               minArgs: 1,
-              maxArgs: 2
-            }
+              maxArgs: 2,
+            },
           },
           topSites: {
             get: {
               minArgs: 0,
-              maxArgs: 0
-            }
+              maxArgs: 0,
+            },
           },
           webNavigation: {
             getAllFrames: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getFrame: {
               minArgs: 1,
-              maxArgs: 1
-            }
+              maxArgs: 1,
+            },
           },
           webRequest: {
             handlerBehaviorChanged: {
               minArgs: 0,
-              maxArgs: 0
-            }
+              maxArgs: 0,
+            },
           },
           windows: {
             create: {
               minArgs: 0,
-              maxArgs: 1
+              maxArgs: 1,
             },
             get: {
               minArgs: 1,
-              maxArgs: 2
+              maxArgs: 2,
             },
             getAll: {
               minArgs: 0,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getCurrent: {
               minArgs: 0,
-              maxArgs: 1
+              maxArgs: 1,
             },
             getLastFocused: {
               minArgs: 0,
-              maxArgs: 1
+              maxArgs: 1,
             },
             remove: {
               minArgs: 1,
-              maxArgs: 1
+              maxArgs: 1,
             },
             update: {
               minArgs: 2,
-              maxArgs: 2
-            }
-          }
+              maxArgs: 2,
+            },
+          },
         };
 
         if (Object.keys(apiMetadata).length === 0) {
@@ -742,7 +742,7 @@
          * @returns {boolean} True if the value is thenable.
          */
 
-        const isThenable = value => {
+        const isThenable = (value) => {
           return (
             value &&
             typeof value === "object" &&
@@ -792,7 +792,7 @@
           };
         };
 
-        const pluralizeArguments = numArgs =>
+        const pluralizeArguments = (numArgs) =>
           numArgs == 1 ? "argument" : "arguments";
         /**
          * Creates a wrapper function for a method with the given name and metadata.
@@ -846,7 +846,7 @@
                     makeCallback(
                       {
                         resolve,
-                        reject
+                        reject,
                       },
                       metadata
                     )
@@ -873,7 +873,7 @@
                   makeCallback(
                     {
                       resolve,
-                      reject
+                      reject,
                     },
                     metadata
                   )
@@ -906,7 +906,7 @@
           return new Proxy(method, {
             apply(targetMethod, thisObj, args) {
               return wrapper.call(thisObj, target, ...args);
-            }
+            },
           });
         };
 
@@ -997,7 +997,7 @@
 
                   set(value) {
                     target[prop] = value;
-                  }
+                  },
                 });
                 return value;
               }
@@ -1022,7 +1022,7 @@
 
             deleteProperty(proxyTarget, prop) {
               return Reflect.deleteProperty(cache, prop);
-            }
+            },
           }; // Per contract of the Proxy API, the "get" proxy handler must return the
           // original value of the target if that value is declared read-only and
           // non-configurable. For this reason, we create an object with the
@@ -1054,7 +1054,7 @@
          * @returns {object}
          */
 
-        const wrapEvent = wrapperMap => ({
+        const wrapEvent = (wrapperMap) => ({
           addListener(target, listener, ...args) {
             target.addListener(wrapperMap.get(listener), ...args);
           },
@@ -1065,11 +1065,11 @@
 
           removeListener(target, listener) {
             target.removeListener(wrapperMap.get(listener));
-          }
+          },
         }); // Keep track if the deprecation warning has been logged at least once.
 
         let loggedSendResponseDeprecationWarning = false;
-        const onMessageWrappers = new DefaultWeakMap(listener => {
+        const onMessageWrappers = new DefaultWeakMap((listener) => {
           if (typeof listener !== "function") {
             return listener;
           }
@@ -1094,8 +1094,8 @@
           return function onMessage(message, sender, sendResponse) {
             let didCallSendResponse = false;
             let wrappedSendResponse;
-            let sendResponsePromise = new Promise(resolve => {
-              wrappedSendResponse = function(response) {
+            let sendResponsePromise = new Promise((resolve) => {
+              wrappedSendResponse = function (response) {
                 if (!loggedSendResponseDeprecationWarning) {
                   console.warn(
                     SEND_RESPONSE_DEPRECATION_WARNING,
@@ -1127,14 +1127,14 @@
             // to translate the message into a resolved promise or a rejected
             // promise).
 
-            const sendPromisedResult = promise => {
+            const sendPromisedResult = (promise) => {
               promise
                 .then(
-                  msg => {
+                  (msg) => {
                     // send the message value.
                     sendResponse(msg);
                   },
-                  error => {
+                  (error) => {
                     // Send a JSON representation of the error if the rejected value
                     // is an instance of error, or the object itself otherwise.
                     let message;
@@ -1151,11 +1151,11 @@
 
                     sendResponse({
                       __mozWebExtensionPolyfillReject__: true,
-                      message
+                      message,
                     });
                   }
                 )
-                .catch(err => {
+                .catch((err) => {
                   // Print an error on the console if unable to send the response.
                   console.error("Failed to send onMessage rejected reply", err);
                 });
@@ -1220,7 +1220,7 @@
           return new Promise((resolve, reject) => {
             const wrappedCb = wrappedSendMessageCallback.bind(null, {
               resolve,
-              reject
+              reject,
             });
             args.push(wrappedCb);
             apiNamespaceObj.sendMessage(...args);
@@ -1233,40 +1233,40 @@
             onMessageExternal: wrapEvent(onMessageWrappers),
             sendMessage: wrappedSendMessage.bind(null, "sendMessage", {
               minArgs: 1,
-              maxArgs: 3
-            })
+              maxArgs: 3,
+            }),
           },
           tabs: {
             sendMessage: wrappedSendMessage.bind(null, "sendMessage", {
               minArgs: 2,
-              maxArgs: 3
-            })
-          }
+              maxArgs: 3,
+            }),
+          },
         };
         const settingMetadata = {
           clear: {
             minArgs: 1,
-            maxArgs: 1
+            maxArgs: 1,
           },
           get: {
             minArgs: 1,
-            maxArgs: 1
+            maxArgs: 1,
           },
           set: {
             minArgs: 1,
-            maxArgs: 1
-          }
+            maxArgs: 1,
+          },
         };
         apiMetadata.privacy = {
           network: {
-            "*": settingMetadata
+            "*": settingMetadata,
           },
           services: {
-            "*": settingMetadata
+            "*": settingMetadata,
           },
           websites: {
-            "*": settingMetadata
-          }
+            "*": settingMetadata,
+          },
         };
         return wrapObject(extensionAPIs, staticWrappers, apiMetadata);
       };

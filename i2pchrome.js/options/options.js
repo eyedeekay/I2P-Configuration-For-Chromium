@@ -1,6 +1,6 @@
 function isDroid() {
   var gettingInfo = browser.runtime.getPlatformInfo();
-  gettingInfo.then(got => {
+  gettingInfo.then((got) => {
     if (got.os == "android") {
       return true;
     } else {
@@ -34,16 +34,16 @@ function setupProxy() {
       singleProxy: {
         scheme: Scheme,
         host: Host,
-        port: parseInt(Port)
-      }
-    }
+        port: parseInt(Port),
+      },
+    },
   };
   chrome.proxy.settings.set(
     {
       value: config,
-      scope: "regular"
+      scope: "regular",
     },
-    function() {}
+    function () {}
   );
 }
 
@@ -140,7 +140,7 @@ function storeSettings() {
     proxy_host,
     proxy_port,
     control_host,
-    control_port
+    control_port,
   });
   console.log("storing proxy scheme:", proxy_scheme);
   console.log("storing proxy host:", proxy_host);
@@ -182,7 +182,7 @@ function updateUI(restoredSettings) {
 function onError(e) {
   console.error(e);
 }
-chrome.storage.local.get(function(got) {
+chrome.storage.local.get(function (got) {
   checkStoredSettings(got);
   updateUI(got);
 });
