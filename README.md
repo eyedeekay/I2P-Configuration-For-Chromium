@@ -19,6 +19,20 @@ with trivial browser-like characteristics.
 
 This is an *EXPERIMENTAL* Procedure.
 
+Privacy Policy
+--------------
+
+This browser extension does not collect any personal information. It requires
+access to local storage and browsing data permissions in order to delete them
+when directed to by the user. This browser extension does not transmit any
+information to any third party, nor will it, ever.
+
+This browser extension cannot influence telemetry carried out by browser vendors
+to determine performance in their distribution channels, nor can it mitigate any
+other browser vendor telemetry. 
+
+This browser extension is entirely Free, Open-Source software.
+
 ### Don't enable syncing for this Profile
 
 You should not enable the use of a google account or plugin syncing for this

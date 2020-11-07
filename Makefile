@@ -14,3 +14,6 @@ release:
 	gothub upload -R -u eyedeekay -r "I2P-Configuration-for-Chromium" -t $(VERSION) -n "i2pchromium.exe" -f "i2pchromium.exe"
 	gothub upload -R -u eyedeekay -r "I2P-Configuration-for-Chromium" -t $(VERSION) -n "i2pchromium-darwin" -f "i2pchromium-darwin"
 	gothub upload -R -u eyedeekay -r "I2P-Configuration-for-Chromium" -t $(VERSION) -n "i2pchromium" -f "i2pchromium"
+
+zip:
+	cd i2pchrome.js && make zip
