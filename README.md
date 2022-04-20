@@ -86,7 +86,6 @@ I2P-ready settings.
         /usr/bin/chromium --user-data-dir="$CHROMIUM_I2P" \
           --proxy-server="http://127.0.0.1:4444" \
           --proxy-bypass-list=127.0.0.1:7657 \
-          --user-data-dir=$HOME/WebApps/i2padmin \
           --safebrowsing-disable-download-protection \
           --disable-client-side-phishing-detection \
           --disable-3d-apis \
@@ -98,12 +97,10 @@ I2P-ready settings.
           --disable-webgl \
           --disable-reading-from-canvas \
           --disable-gpu \
-          --disable-32-apis \
           --disable-auto-reload \
           --disable-background-networking \
           --disable-d3d11 \
-          --disable-file-system \
-          --app=http://127.0.0.1:7657 $@
+          --disable-file-system $@
 
 ### Notes
 

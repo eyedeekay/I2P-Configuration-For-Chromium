@@ -49,6 +49,18 @@ chrome.webRequest.onBeforeRequest.addListener(
       }
     }
   },
-  { urls: ["<all_urls>"] },
-  ["blocking"]
+  { urls: ["<all_urls>"] }
+);
+
+function setupBrowsingGroup(groupid){
+	chrome.tabGroup.update(groupid, {color: "yellow", title: "I2P Browsing"})
+}
+
+chrome.webRequest.onBeforeRequest.addListener(
+  function(details) { 
+	chrome.tabs.group({tabIds: details.tabId}, setupBrowsingGroup)
+	console.log(details);
+	return ;//{cancel: true}; 
+	},
+  {urls: ["*://*.i2p/*"]}
 );

@@ -30,7 +30,6 @@
   },
   "background": {
     "scripts": [
-      "browser-polyfill.js",
       "background.js",
       "proxy.js",
       "info.js",

@@ -17,3 +17,6 @@ release:
 
 zip:
 	cd i2pchrome.js && make zip
+
+test:
+	chromium --user-data-dir=testchromium --load-extension=./i2pchrome.js
